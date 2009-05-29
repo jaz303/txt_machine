@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "test/message_test.rb",
      "test/test_gateway_test.rb",
      "test/txt_machine_test.rb",
+     "txt_machine.gemspec",
      "txt_machine.rb"
   ]
   s.has_rdoc = true
