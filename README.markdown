@@ -13,7 +13,7 @@ Quick Example
 -------------
 
     TxtMachine.configure(
-      :adapter => TxtMachine::Adapters::ItaggAdapter,
+      :gateway => TxtMachine::Gateways::Itagg,
       :username => "username",
       :password => "password",
       :originator => "Captain Haddock"
@@ -38,7 +38,7 @@ Quick Example
 Writing an adapter
 ------------------
 
-Check out `SkeletonAdapter`, it's probably easiest to extend this. Most
+Check out `TxtMachine::Gateways::Skeleton`, it's probably easiest to extend this. Most
 SMS gateways I've seen use HTTP so all you need to do is implement the `send` method
 in your adapter to send in-place.
 
@@ -48,7 +48,7 @@ Test Integration
 Like ActionMailer, TxtMachine has a test mode which pushes all delivered messages onto
 an array:
 
-    TxtMachine[:adapter] = TxtMachine::Adapters::TestAdapter
+    TxtMachine[:gateway] = TxtMachine::Gateways::Test
     TxtMachine.send_message("my message", :to => [r1, r2])
     
     assert_equal 1, TxtMachine.deliveries.length
