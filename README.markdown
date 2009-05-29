@@ -13,10 +13,10 @@ Quick Example
 -------------
 
     TxtMachine.configure(
-        :adapter => TxtMachine::Adapters::ItaggAdapter,
-        :username => "username",
-        :password => "password",
-        :originator => "Captain Haddock"
+      :adapter => TxtMachine::Adapters::ItaggAdapter,
+      :username => "username",
+      :password => "password",
+      :originator => "Captain Haddock"
     )
     
     # Send a single message
@@ -38,7 +38,7 @@ Quick Example
 Writing an adapter
 ------------------
 
-Check out the code for `SkeletonAdapter`, it's probably easiest to extend this. Most
+Check out `SkeletonAdapter`, it's probably easiest to extend this. Most
 SMS gateways I've seen use HTTP so all you need to do is implement the `send` method
 in your adapter to send in-place.
 
