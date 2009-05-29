@@ -1,7 +1,7 @@
 class TxtMachine
   
   @@config = {
-    :adapter  => :none,
+    :gateway  => nil,
     :logger   => nil
   }
 
@@ -34,15 +34,15 @@ class TxtMachine
   end
   
   def start
-    adapter.connect { yield self }
+    gateway.connect { yield self }
   end
   
   def send_message(*args)
-    adapter.send(build_message(*args))
+    gateway.send(build_message(*args))
   end
   
-  def adapter
-    @adapter ||= adapter_class.new(@config)
+  def gateway
+    @gateway ||= gateway_class.new(@config)
   end
   
   def build_message(*params)
@@ -55,10 +55,10 @@ class TxtMachine
   
 private
 
-  def adapter_class
-    case @config[:adapter]
+  def gateway_class
+    case @config[:gateway]
     when Class
-      @config[:adapter]
+      @config[:gateway]
     else
       raise ArgumentError
     end

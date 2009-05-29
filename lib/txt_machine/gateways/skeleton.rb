@@ -1,6 +1,6 @@
 class TxtMachine
-  module Adapters
-    class SkeletonAdapter
+  module Gateways
+    class Skeleton
     
       def initialize(config = {})
         @config = default_config.merge(config)

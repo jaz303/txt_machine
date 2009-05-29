@@ -4,8 +4,8 @@ require 'net/https'
 require 'cgi'
 
 class TxtMachine
-  module Adapters
-    class ItaggAdapter < SkeletonAdapter
+  module Gateways
+    class Itagg < Skeleton
       
       ENDPOINT          = 'https://secure.itagg.com/smsg/sms.mes'
       ENDURI            = URI.parse(ENDPOINT)

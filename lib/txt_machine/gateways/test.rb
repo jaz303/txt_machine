@@ -10,8 +10,8 @@ class TxtMachine
     @@deliveries
   end
   
-  module Adapters
-    class TestAdapter < SkeletonAdapter
+  module Gateways
+    class Test < Skeleton
       
       def send(message)
         TxtMachine.deliveries << message

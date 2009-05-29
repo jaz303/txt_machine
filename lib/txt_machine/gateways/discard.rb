@@ -1,6 +1,6 @@
 class TxtMachine
-  module Adapters
-    class DiscardAdapter < SkeletonAdapter
+  module Gateways
+    class Discard < Skeleton
       def send(message)
       end
     end

@@ -4,11 +4,11 @@ require 'flexmock/test_unit'
 class TxtMachineTest < Test::Unit::TestCase
   
   def setup
-    @tm = TxtMachine.new(:adapter => TxtMachine::Adapters::DiscardAdapter)
+    @tm = TxtMachine.new(:gateway => TxtMachine::Gateways::Discard)
   end
   
-  def test_correct_adapter_is_created
-    assert @tm.adapter.is_a?(TxtMachine::Adapters::DiscardAdapter)
+  def test_correct_gateway_is_created
+    assert @tm.gateway.is_a?(TxtMachine::Gateways::Discard)
   end
   
   def test_build_message_handles_message
@@ -40,10 +40,10 @@ class TxtMachineTest < Test::Unit::TestCase
     end
   end
   
-  def test_send_message_should_invoke_send_on_adapter
+  def test_send_message_should_invoke_send_on_gateway
     msg = TxtMachine::Message.new
     TxtMachine.start do |tm|
-      flexmock(tm.adapter).should_receive(:send).once.with(msg)
+      flexmock(tm.gateway).should_receive(:send).once.with(msg)
       tm.send_message(msg)
     end
   end
