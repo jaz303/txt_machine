@@ -6,6 +6,14 @@ class TestGatewayTest < Test::Unit::TestCase
     @gateway = TxtMachine.new.gateway
   end
   
+  def test_test_mode_is_sane
+    TxtMachine[:gateway] = nil
+    TxtMachine.deliveries << 'foo'
+    TxtMachine.test_mode!
+    assert_equal TxtMachine::Gateways::Test, TxtMachine[:gateway]
+    assert TxtMachine.deliveries.empty?
+  end
+  
   def test_sent_messages_are_added_to_deliveries
     m1 = TxtMachine::Message.new
     m2 = TxtMachine::Message.new

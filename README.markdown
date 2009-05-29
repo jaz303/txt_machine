@@ -48,7 +48,11 @@ Test Integration
 Like ActionMailer, TxtMachine has a test mode which pushes all delivered messages onto
 an array:
 
-    TxtMachine[:gateway] = TxtMachine::Gateways::Test
+    # Equivalent to:
+    # TxtMachine[:gateway] = TxtMachine::Gateways::Test
+    # TxtMachine.clear_deliveries!
+    TxtMachine.test_mode!
+    
     TxtMachine.send_message("my message", :to => [r1, r2])
     
     assert_equal 1, TxtMachine.deliveries.length

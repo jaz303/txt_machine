@@ -2,6 +2,11 @@ class TxtMachine
   
   @@deliveries = []
   
+  def self.test_mode!
+    self[:gateway] = Gateways::Test
+    clear_deliveries!
+  end
+  
   def self.clear_deliveries!
     @@deliveries = []
   end
