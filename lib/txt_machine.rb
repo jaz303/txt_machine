@@ -46,6 +46,6 @@ module TxtMachine
 
 end
 
-if defined? RAILS_ENV && RAILS_ENV == 'test'
+if defined?(RAILS_ENV) && RAILS_ENV == 'test'
   TxtMachine.test_mode!
 end
