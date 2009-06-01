@@ -15,7 +15,7 @@ rescue LoadError
 end
 
 task :txt_machine do
-  require 'txt_machine'
+  require 'lib/txt_machine'
 end
 
 desc "Run the tests"

@@ -1,4 +1,15 @@
-class TxtMachine
+%w(
+  base
+  message
+  gateways/skeleton
+  gateways/discard
+  gateways/test
+  gateways/itagg
+).each do |file|
+  require File.dirname(__FILE__) + '/txt_machine/' + file
+end
+
+module TxtMachine
   
   @@config = {
     :gateway  => nil,
@@ -21,47 +32,16 @@ class TxtMachine
     @@config = config
   end
   
+  def self.new(config = {})
+    Base.new(@@config.merge(config))
+  end
+  
   def self.start(config = {}, &block)
     new(config).start(&block)
   end
   
   def self.send_message(*args)
     start { |me| me.send_message(*args) }
-  end
-  
-  def initialize(config = {})
-    @config = @@config.merge(config)
-  end
-  
-  def start
-    gateway.connect { yield self }
-  end
-  
-  def send_message(*args)
-    gateway.send(build_message(*args))
-  end
-  
-  def gateway
-    @gateway ||= gateway_class.new(@config)
-  end
-  
-  def build_message(*params)
-    if params.first.is_a?(Message)
-      params.first
-    else
-      Message.new(*params)
-    end
-  end
-  
-private
-
-  def gateway_class
-    case @config[:gateway]
-    when Class
-      @config[:gateway]
-    else
-      raise ArgumentError
-    end
   end
 
 end

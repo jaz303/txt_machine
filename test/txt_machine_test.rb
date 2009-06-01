@@ -36,7 +36,7 @@ class TxtMachineTest < Test::Unit::TestCase
   
   def test_start_should_yield_self
     TxtMachine.start do |tm|
-      assert tm.is_a?(TxtMachine)
+      assert tm.is_a?(TxtMachine::Base)
     end
   end
   
@@ -47,6 +47,5 @@ class TxtMachineTest < Test::Unit::TestCase
       tm.send_message(msg)
     end
   end
-  
   
 end

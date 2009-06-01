@@ -3,7 +3,7 @@ require 'net/http'
 require 'net/https'
 require 'cgi'
 
-class TxtMachine
+module TxtMachine
   module Gateways
     class Itagg < Skeleton
       

@@ -1,4 +1,4 @@
-class TxtMachine
+module TxtMachine
   module Gateways
     class Discard < Skeleton
       def send(message)

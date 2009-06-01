@@ -1,4 +1,4 @@
-class TxtMachine
+module TxtMachine
   
   @@deliveries = []
   
