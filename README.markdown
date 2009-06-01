@@ -42,6 +42,38 @@ Check out `TxtMachine::Gateways::Skeleton`, it's probably easiest to extend this
 SMS gateways I've seen use HTTP so all you need to do is implement the `send` method
 in your adapter to send in-place.
 
+Using with Rails
+----------------
+
+Perform any global configuration using `config.after_initialize` within
+`Rails::Initializer.run`:
+
+    Rails::Initializer.run do |config|
+    
+      # ...
+      
+      config.gem "jaz303-txt_machine", :lib => "txt_machine"
+      
+      # ...
+      
+      config.after_initialize do
+        TxtMachine[:originator] = "Bob's Sprockets Co"
+      end
+      
+    end
+    
+And then any per-env config in the appropriate file, again using `config.after_initialize`.
+
+    # in production.rb...
+    
+    config.after_initialize do
+      TxtMachine[:gateway] = My::Funky::Gateway
+      TxtMachine[:api_key] = 'g1bb3r1sh'
+    end
+    
+Please use an `after_initialize` block otherwise things will get screwy with gems being
+inexplicably loaded twice.
+
 Test Integration
 ----------------
 
@@ -57,6 +89,8 @@ an array:
     
     assert_equal 1, TxtMachine.deliveries.length
     => true
+    
+TxtMachine will detect Rails' test environment and set itself up accordingly.
     
 Contributing
 ------------
