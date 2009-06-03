@@ -22,20 +22,22 @@ module TxtMachine
         path += '?' + message_to_hash(msg).map { |k,v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}"}.join('&')
       
         begin
+          
           req = Net::HTTP::Post.new(path)
           http = Net::HTTP.new(ENDURI.host, ENDURI.port)
           http.use_ssl = true
           http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           res = http.start { |http| http.request(req) }
-        rescue => e
-          
-        end
         
-        case res
-        when Net::HTTPSuccess
-          # OK
-        else
-          # error
+          case res
+          when Net::HTTPSuccess
+            # OK
+          else
+            res.error!
+          end
+        
+        rescue StandardError => e
+          raise SendFailedError.new(:wrapped_exception => e)
         end
       
       end

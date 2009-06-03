@@ -1,4 +1,5 @@
 %w(
+  errors
   base
   message
   gateways/skeleton
